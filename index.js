@@ -11,7 +11,7 @@ function submitData(userName, userEmail) {
       })
     };
   
-    fetch('http://localhost:3000/users', configurationObject)
+    return fetch('http://localhost:3000/users', configurationObject)
       .then(response => response.json())
       .then(data => {
         const id = data.id;
@@ -19,8 +19,12 @@ function submitData(userName, userEmail) {
         idElement.textContent = `New ID: ${id}`;
         document.body.appendChild(idElement);
       })
-      .catch(error => console.error('Error:', error));
-  }
+      .catch(error => {
+        const errorMessageElement = document.createElement('p');
+        errorMessageElement.textContent = `Error: ${error.message}`;
+        document.body.appendChild(errorMessageElement);
+      }
+  )}
   
   const userName = 'Ravine Derrick';
   const userEmail = 'ravinederick13@gmail.com';
